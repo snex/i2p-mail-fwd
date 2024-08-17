@@ -38,6 +38,7 @@ class Forwarder
 -----END PGP MESSAGE-----
 PGP
       emails << pgp
+      File.delete(f)
     end
 
     return if emails.empty?
