@@ -1,0 +1,36 @@
+# your i2p config
+i2p:
+  host: 127.0.0.1
+  port: 7660
+
+# your smtp server config
+# times_per_day is the AVERAGE number of times per day the emails will be forwarded
+# forwarding is done randomly to avoid timing or correlation attacks.
+smtp:
+  host:     SMTP_HOST
+  port:     25
+  username: SMTP_USERNAME
+  password: SMTP_PASSWORD
+  from:     FROM_ADDRESS
+  to:       TO_ADDRESS
+  subject:  SUBJECT
+# uncomment if your smtp server requires ssl/tls
+# ssl:    true
+  times_per_day: 24
+
+# your pop accounts on i2pmail
+# times_per_day is the AVERAGE number of times per day the inbox will be checked.
+# checking is done randomly per account to avoid timing or correlation attacks.
+accounts:
+  -
+    username:      USERNAME
+    password:      PASSWORD
+    times_per_day: 3
+  -
+    username: USERNAME
+    password: PASSWORD
+    times_per_day: 5
+
+# your gpg config
+gpg:
+  recipient: RECIPIENT
