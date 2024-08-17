@@ -26,7 +26,8 @@ class Fetcher
       if pop.mails.empty?
         next
       else
-        i = 0
+        i = Dir.glob('inbox/*.eml').size
+
         pop.each_mail do |m|
           File.open("inbox/#{i}.eml", 'w') do |f|
             f.write m.pop
