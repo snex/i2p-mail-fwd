@@ -1,0 +1,24 @@
+# your i2p config
+i2p:
+  host: 127.0.0.1
+  port: 7660
+
+# your smtp server config
+smtp:
+  host:     SMTP_HOST
+  port:     25
+  username: SMTP_USERNAME
+  password: SMTP_PASSWORD
+  from:     FROM_ADDRESS
+  to:       TO_ADDRESS
+  subject:  SUBJECT
+
+# your pop accounts on i2pmail
+accounts:
+  -
+    username: USERNAME
+    password: PASSWORD
+
+# your gpg config
+gpg:
+  recipient: RECIPIENT
