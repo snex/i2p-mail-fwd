@@ -38,7 +38,7 @@ class Forwarder
 -----END PGP MESSAGE-----
 PGP
       emails << pgp
-      File.delete(f)
+      FileUtils.mv(f, "forwarded/#{File.basename(f)}")
     end
 
     return if emails.empty?
