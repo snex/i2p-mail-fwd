@@ -26,10 +26,12 @@ accounts:
     username:      USERNAME
     password:      PASSWORD
     times_per_day: 3
+    retries:       3
   -
     username: USERNAME
     password: PASSWORD
     times_per_day: 5
+    retries:       10
 
 # your gpg config
 gpg:

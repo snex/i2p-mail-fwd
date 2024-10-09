@@ -18,26 +18,33 @@ class Fetcher
       username = account['username']
       password = account['password']
       times_per_day = account['times_per_day']
+      retries = account['retries']
 
       next unless Util.should_perform?(times_per_day)
 
-      pop.start(username, password)
+      begin
+        num_tries = 1
+        pop.start(username, password)
 
-      if pop.mails.empty?
-        next
-      else
-        i = Dir.glob('inbox/*.eml').size
+        if pop.mails.empty?
+          next
+        else
+          i = Dir.glob('inbox/*.eml').size
 
-        pop.each_mail do |m|
-          File.open("inbox/#{i}.eml", 'w') do |f|
-            f.write m.pop
+          pop.each_mail do |m|
+            File.open("inbox/#{i}.eml", 'w') do |f|
+              f.write m.pop
+            end
+            m.delete
+            i += 1
           end
-          m.delete
-          i += 1
         end
-      end
 
-      pop.finish
+        pop.finish
+      rescue Net::ReadTimeout
+        num_tries += 1
+        retry if num_tries < retries
+      end
     end
   end
 end
