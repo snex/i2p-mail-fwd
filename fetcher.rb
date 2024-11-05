@@ -46,7 +46,7 @@ class Fetcher
         retry if num_tries < retries
       ensure
         fetched = true
-        pop.finish
+        pop.finish if pop.started?
       end
     end
   end
