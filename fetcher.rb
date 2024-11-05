@@ -24,7 +24,7 @@ class Fetcher
 
       begin
         num_tries = 1
-        pop.start(username, password)
+        pop.start(username, password) unless pop.started?
 
         if pop.mails.empty?
           next
@@ -39,11 +39,11 @@ class Fetcher
             i += 1
           end
         end
-
-        pop.finish
       rescue Net::ReadTimeout
         num_tries += 1
         retry if num_tries < retries
+      ensure
+        pop.finish
       end
     end
   end
