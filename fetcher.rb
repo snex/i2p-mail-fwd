@@ -13,6 +13,7 @@ class Fetcher
 
   def fetch
     pop = Net::POP3.new(@host, @port)
+    fetched = false
 
     @accounts.each do |account|
       username = account['username']
@@ -20,6 +21,7 @@ class Fetcher
       times_per_day = account['times_per_day']
       retries = account['retries']
 
+      return if fetched
       next unless Util.should_perform?(times_per_day)
 
       begin
@@ -43,6 +45,7 @@ class Fetcher
         num_tries += 1
         retry if num_tries < retries
       ensure
+        fetched = true
         pop.finish
       end
     end
